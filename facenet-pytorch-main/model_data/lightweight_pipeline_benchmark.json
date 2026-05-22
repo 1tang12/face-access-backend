@@ -1,0 +1,11 @@
+{
+  "query_image": "face_100_lfwq_1_Venus_Williams_0017.jpg",
+  "single_infer_ms_mean": 3.875,
+  "single_infer_ms_p95": 5.983,
+  "tta_extract_ms_mean": 33.811,
+  "tta_extract_ms_p95": 35.456,
+  "search_100_ms_mean": 0.0114,
+  "search_100_ms_p95": 0.0126,
+  "search_221_ms_mean": 0.0262,
+  "search_221_ms_p95": 0.0578
+}

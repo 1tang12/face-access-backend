@@ -1,0 +1,14 @@
+{
+  "params": {
+    "mobilenet_total": 3338304,
+    "inception_total": 22793728,
+    "ratio_inception_over_mobile": 6.827936580970457
+  },
+  "latency_ms": {
+    "mobilenet_mean": 14.253,
+    "mobilenet_p95": 14.852,
+    "inception_mean": 12.385,
+    "inception_p95": 12.962,
+    "speedup_mobile_vs_inception": 0.869
+  }
+}

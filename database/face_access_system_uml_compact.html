@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>face_access_system_uml_compact</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: "Times New Roman", "Songti SC", serif;
+    }
+    .page {
+      width: 1300px;
+      min-height: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+    .title {
+      margin: 0 0 16px 0;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #111111;
+    }
+    .subtitle {
+      margin: 0 0 24px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #555555;
+    }
+    #diagram {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #ffffff;
+    }
+    .mermaid {
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 class="title">人脸识别门禁系统数据库 UML 图</h1>
+    <p class="subtitle">紧凑版</p>
+    <div id="diagram">
+      <pre class="mermaid">
+classDiagram
+direction TB
+
+class sys_user {
+  +id PK
+  +username
+  +real_name
+  +phone
+  +status
+}
+
+class sys_role {
+  +id PK
+  +role_name
+  +role_code
+}
+
+class sys_permission {
+  +id PK
+  +permission_name
+  +permission_code
+  +parent_id FK
+}
+
+class sys_user_role {
+  +id PK
+  +user_id FK
+  +role_id FK
+}
+
+class sys_role_permission {
+  +id PK
+  +role_id FK
+  +permission_id FK
+}
+
+class face_feature {
+  +id PK
+  +user_id FK
+  +face_image_path
+  +quality_score
+}
+
+class access_device {
+  +id PK
+  +device_name
+  +device_code
+  +location
+  +status
+}
+
+class access_record {
+  +id PK
+  +user_id FK
+  +device_id FK
+  +access_time
+  +result
+}
+
+class attendance_record {
+  +id PK
+  +user_id FK
+  +attendance_date
+  +status
+}
+
+class visitor_appointment {
+  +id PK
+  +visitor_user_id FK
+  +reviewer_id FK
+  +status
+  +valid_start_time
+  +valid_end_time
+}
+
+class operation_log {
+  +id PK
+  +user_id FK
+  +operation_type
+  +operate_time
+}
+
+sys_user "1" --> "n" sys_user_role
+sys_role "1" --> "n" sys_user_role
+sys_role "1" --> "n" sys_role_permission
+sys_permission "1" --> "n" sys_role_permission
+sys_permission "1" --> "n" sys_permission
+sys_user "1" --> "n" face_feature
+sys_user "1" --> "n" access_record
+access_device "1" --> "n" access_record
+sys_user "1" --> "n" attendance_record
+sys_user "1" --> "n" operation_log
+sys_user "1" --> "n" visitor_appointment : visitor
+sys_user "1" --> "n" visitor_appointment : reviewer
+      </pre>
+    </div>
+  </div>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      class: { useMaxWidth: false }
+    });
+    window.addEventListener('load', async () => {
+      await mermaid.run();
+      document.body.setAttribute('data-rendered', 'true');
+    });
+  </script>
+</body>
+</html>

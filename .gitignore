@@ -1,0 +1,16 @@
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+demo/target/
+demo/out/
+demo/logs/
+demo/uploads/
+
+facenet-pytorch-main/__pycache__/
+facenet-pytorch-main/**/*.pyc
+facenet-pytorch-main/img/
+
+logs/
+uploads/

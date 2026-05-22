@@ -1,0 +1,98 @@
+classDiagram
+direction TB
+
+class sys_user {
+  +id PK
+  +username
+  +real_name
+  +phone
+  +status
+}
+
+class sys_role {
+  +id PK
+  +role_name
+  +role_code
+}
+
+class sys_permission {
+  +id PK
+  +permission_name
+  +permission_code
+  +parent_id FK
+}
+
+class sys_user_role {
+  +id PK
+  +user_id FK
+  +role_id FK
+}
+
+class sys_role_permission {
+  +id PK
+  +role_id FK
+  +permission_id FK
+}
+
+class face_feature {
+  +id PK
+  +user_id FK
+  +face_image_path
+  +quality_score
+}
+
+class access_device {
+  +id PK
+  +device_name
+  +device_code
+  +location
+  +status
+}
+
+class access_record {
+  +id PK
+  +user_id FK
+  +device_id FK
+  +access_time
+  +result
+}
+
+class attendance_record {
+  +id PK
+  +user_id FK
+  +attendance_date
+  +status
+}
+
+class visitor_appointment {
+  +id PK
+  +visitor_user_id FK
+  +reviewer_id FK
+  +status
+  +valid_start_time
+  +valid_end_time
+}
+
+class operation_log {
+  +id PK
+  +user_id FK
+  +operation_type
+  +operate_time
+}
+
+sys_user "1" --> "n" sys_user_role
+sys_role "1" --> "n" sys_user_role
+
+sys_role "1" --> "n" sys_role_permission
+sys_permission "1" --> "n" sys_role_permission
+sys_permission "1" --> "n" sys_permission
+
+sys_user "1" --> "n" face_feature
+sys_user "1" --> "n" access_record
+access_device "1" --> "n" access_record
+
+sys_user "1" --> "n" attendance_record
+sys_user "1" --> "n" operation_log
+
+sys_user "1" --> "n" visitor_appointment : visitor
+sys_user "1" --> "n" visitor_appointment : reviewer
